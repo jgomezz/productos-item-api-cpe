@@ -12,9 +12,9 @@ import pe.edu.tecsup.productoitemapi.dto.Producto;
 public interface ProductoClienteRest {
 
 	@GetMapping("/productos")
-	public List<Producto> listar();
+	List<Producto> listar();
 
 	@GetMapping("/productos/id/{id}")
-	public Producto detalle(@PathVariable Long id);
+	Producto detalle(@PathVariable Long id);
 
 }

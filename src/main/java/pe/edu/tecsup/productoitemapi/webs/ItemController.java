@@ -2,6 +2,7 @@ package pe.edu.tecsup.productoitemapi.webs;
 
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,20 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 import pe.edu.tecsup.productoitemapi.dto.Item;
 import pe.edu.tecsup.productoitemapi.services.ItemServiceFeign;
 
+@Slf4j
 @RestController
 public class ItemController {
 
-	private static final Logger logger = LoggerFactory.getLogger(ItemController.class);
-	
-	@Autowired	// Feign
-	private ItemServiceFeign itemServiceFeign;	// Si se usa interface, habria dos tipos de itemService, se usa  @Qualifier para solucionar
+	private ItemServiceFeign itemServiceFeign;
 
-	@GetMapping("/test")
-	public String test() {
-		return "test";
+	public ItemController(ItemServiceFeign itemServiceFeign) {
+		this.itemServiceFeign = itemServiceFeign;
 	}
-	
-		
+
 	@GetMapping("/items")
 	public List<Item> listar() {
 			return itemServiceFeign.findAll();
